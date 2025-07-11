@@ -31,6 +31,8 @@ from .file_name import OBJECT_PT_file_name
 from .add_collider import MYADDON_OT_add_collider
 from .collider import OBJECT_PT_collider
 from .collider import DrawCollider
+from .disabled import MYADDON_OT_add_disabled
+from .disabled import OBJECT_PT_disabled
 
 # アドオン有効時の初期コールバック
 def register():
@@ -76,4 +78,6 @@ classes = (
     OBJECT_PT_file_name,
     MYADDON_OT_add_collider,
     OBJECT_PT_collider,
+    MYADDON_OT_add_disabled,
+    OBJECT_PT_disabled
 )
