@@ -33,6 +33,8 @@ from .collider import OBJECT_PT_collider
 from .collider import DrawCollider
 from .disabled import MYADDON_OT_add_disabled
 from .disabled import OBJECT_PT_disabled
+from .spawn import MYADDON_OT_spawn_import_symbol
+from .spawn import MYADDON_OT_spawn_create_symbol
 
 # アドオン有効時の初期コールバック
 def register():
@@ -79,5 +81,7 @@ classes = (
     MYADDON_OT_add_collider,
     OBJECT_PT_collider,
     MYADDON_OT_add_disabled,
-    OBJECT_PT_disabled
+    OBJECT_PT_disabled,
+    MYADDON_OT_spawn_import_symbol,
+    MYADDON_OT_spawn_create_symbol
 )
