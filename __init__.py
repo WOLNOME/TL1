@@ -35,6 +35,9 @@ from .disabled import MYADDON_OT_add_disabled
 from .disabled import OBJECT_PT_disabled
 from .spawn import MYADDON_OT_spawn_import_symbol
 from .spawn import MYADDON_OT_spawn_create_symbol
+from .spawn import MYADDON_OT_spawn_create_player_symbol
+from .spawn import MYADDON_OT_spawn_create_enemy_symbol
+
 
 # アドオン有効時の初期コールバック
 def register():
@@ -83,5 +86,7 @@ classes = (
     MYADDON_OT_add_disabled,
     OBJECT_PT_disabled,
     MYADDON_OT_spawn_import_symbol,
-    MYADDON_OT_spawn_create_symbol
+    MYADDON_OT_spawn_create_symbol,
+    MYADDON_OT_spawn_create_player_symbol,
+    MYADDON_OT_spawn_create_enemy_symbol
 )
