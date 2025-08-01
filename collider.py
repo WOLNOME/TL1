@@ -28,7 +28,6 @@ class OBJECT_PT_collider(bpy.types.Panel):
             #プロパティがなければ、プロパティ追加ボタンを表示
             self.layout.operator(MYADDON_OT_add_collider.bl_idname)
 
-            
 #コライダー描画
 class DrawCollider:
 

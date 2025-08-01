@@ -22,28 +22,6 @@ class MYADDON_OT_export_scene(bpy.types.Operator, bpy_extras.io_utils.ExportHelp
         self.report({'INFO'},"シーン情報をExportしました")
 
         return {'FINISHED'}
-    
-    def export(self):
-        """ファイルに出力"""
-
-        print("シーン情報出力開始... %r" % self.filepath)
-
-        #ファイルをテキスト形式で書き出し用にオープン
-        #スコープを抜けると自動的にクローズされる
-        with open(self.filepath, "wt") as file:
-
-            #ファイルに文字列を書き込む
-            self.write_and_print(file,"SCENE")
-
-            #シーン内の全オブジェクトについて
-            for object in bpy.context.scene.objects:
-                
-                #親オブジェクトがあるものはスキップ
-                if (object.parent):
-                    continue
-
-                #シーン直下のオブジェクトをルートノード(深さ0)とし、再帰関数で走査
-                self.parse_scene_recursive(file,object,0)
 
     def export_json(self):
         """JSON形式でファイルに出力"""
@@ -78,54 +56,6 @@ class MYADDON_OT_export_scene(bpy.types.Operator, bpy_extras.io_utils.ExportHelp
             
             #ファイルに文字列を書き込む
             file.write(json_text)
-
-    def write_and_print(self,file,str):
-        print(str)
-
-        file.write(str)
-        file.write('\n')
-
-    def parse_scene_recursive(self,file,object,level):
-        """シーン解析用再起関数"""
-
-        #深さ分インデントする(タブを挿入)
-        indent=''
-        for i in range(level):
-            indent += "\t"
-
-        #オブジェクト名書き込み
-        self.write_and_print(file,indent+object.type)
-        trans,rot,scale=object.matrix_local.decompose()
-        #回転を Quaternion から Eular (3軸での回転角)に変換
-        rot=rot.to_euler()
-        #ラジアンから度数法に変換
-        rot.x=math.degrees(rot.x)
-        rot.y=math.degrees(rot.y)
-        rot.z=math.degrees(rot.z)
-        #トランスフォーム情報を表示
-        self.write_and_print(file, indent+"Trans(%f,%f,%f)" % (trans.x, trans.y, trans.z) )
-        self.write_and_print(file, indent+"Rot(%f,%f,%f)" % (rot.x, rot.y, rot.z) )
-        self.write_and_print(file, indent+"Scale(%f,%f,%f)" % (scale.x, scale.y, scale.z) )
-        #カスタムプロパティ'file_name'
-        if "file_name" in object:
-            self.write_and_print(file,indent+"Name %s" % object["file_name"])
-        #カスタムプロパティ'collision'
-        if "collider" in object:
-            self.write_and_print(file,indent + "C %s" % object["collider"])
-            temp_str = indent+"CC %f %f %f"
-            temp_str %=(object["collider_center"][0],object["collider_center"][1],object["collider_center"][2])
-            self.write_and_print(file,temp_str)
-            temp_str=indent+"CS %f %f %f"
-            temp_str%=(object["collider_size"][0],object["collider_size"][1],object["collider_size"][2])
-            self.write_and_print(file,temp_str)
-
-        # 終了
-        self.write_and_print(file,indent+'END')
-        self.write_and_print(file, '')
-
-        #子ノードへ進む(深さが1上がる)
-        for child in object.children:
-            self.parse_scene_recursive(file,child,level+1)
 
     def parse_scene_recursive_json(self,data_parent,object,level):
 

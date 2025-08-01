@@ -24,6 +24,7 @@ bl_info = {
 # モジュールのインポート
 from .create_ico_sphere import MYADDON_OT_create_ico_sphere
 from .stretch_vertex import MYADDON_OT_stretch_vertex
+from .import_scene import MYADDON_OT_import_scene
 from .export_scene import MYADDON_OT_export_scene
 from .my_menu import TOPBAR_MT_my_menu
 from .add_filename import MYADDON_OT_add_filename
@@ -33,10 +34,11 @@ from .collider import OBJECT_PT_collider
 from .collider import DrawCollider
 from .disabled import MYADDON_OT_add_disabled
 from .disabled import OBJECT_PT_disabled
-from .spawn import MYADDON_OT_spawn_import_symbol
-from .spawn import MYADDON_OT_spawn_create_symbol
-from .spawn import MYADDON_OT_spawn_create_player_symbol
-from .spawn import MYADDON_OT_spawn_create_enemy_symbol
+from .load_objects import MYADDON_OT_load_objects
+from .create_object import MYADDON_OT_create_object
+from .create_object import MYADDON_OT_spawn_create_player_symbol
+from .create_object import MYADDON_OT_spawn_create_enemy_symbol
+from .create_object import MYADDON_OT_create_tree_object
 
 
 # アドオン有効時の初期コールバック
@@ -75,6 +77,7 @@ if __name__ == "__main__":
 classes = (
     MYADDON_OT_create_ico_sphere,
     MYADDON_OT_stretch_vertex,
+    MYADDON_OT_import_scene,
     MYADDON_OT_export_scene,
 
     TOPBAR_MT_my_menu,
@@ -85,8 +88,9 @@ classes = (
     OBJECT_PT_collider,
     MYADDON_OT_add_disabled,
     OBJECT_PT_disabled,
-    MYADDON_OT_spawn_import_symbol,
-    MYADDON_OT_spawn_create_symbol,
+    MYADDON_OT_load_objects,
+    MYADDON_OT_create_object,
     MYADDON_OT_spawn_create_player_symbol,
-    MYADDON_OT_spawn_create_enemy_symbol
+    MYADDON_OT_spawn_create_enemy_symbol,
+    MYADDON_OT_create_tree_object
 )

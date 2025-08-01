@@ -3,9 +3,11 @@ import bpy
 #モジュールのインポート
 from .stretch_vertex import MYADDON_OT_stretch_vertex
 from .create_ico_sphere import MYADDON_OT_create_ico_sphere
+from .import_scene import MYADDON_OT_import_scene
 from .export_scene import MYADDON_OT_export_scene
-from .spawn import MYADDON_OT_spawn_create_player_symbol
-from .spawn import MYADDON_OT_spawn_create_enemy_symbol
+from .create_object import MYADDON_OT_spawn_create_player_symbol
+from .create_object import MYADDON_OT_spawn_create_enemy_symbol
+from .create_object import MYADDON_OT_create_tree_object
 
 #トップバーの拡張メニュー
 class TOPBAR_MT_my_menu(bpy.types.Menu):
@@ -25,14 +27,23 @@ class TOPBAR_MT_my_menu(bpy.types.Menu):
         #ICO球生成項目を追加
         self.layout.operator(MYADDON_OT_create_ico_sphere.bl_idname,text=MYADDON_OT_create_ico_sphere.bl_label)
 
+        #シーン読み込み項目を追加
+        self.layout.operator(MYADDON_OT_import_scene.bl_idname,text=MYADDON_OT_import_scene.bl_label)
+
         #シーン出力項目を追加
         self.layout.operator(MYADDON_OT_export_scene.bl_idname,text=MYADDON_OT_export_scene.bl_label)
+
+        #区切り
+        self.layout.separator()
 
         #プレイヤーの出現シンボルの作成
         self.layout.operator(MYADDON_OT_spawn_create_player_symbol.bl_idname,text=MYADDON_OT_spawn_create_player_symbol.bl_label)
 
         #敵の出現シンボルの作成
         self.layout.operator(MYADDON_OT_spawn_create_enemy_symbol.bl_idname,text=MYADDON_OT_spawn_create_enemy_symbol.bl_label)
+
+        #ツリーオブジェクトの作成
+        self.layout.operator(MYADDON_OT_create_tree_object.bl_idname,text=MYADDON_OT_create_tree_object.bl_label)
 
         #マニュアルを追加
         self.layout.separator()
